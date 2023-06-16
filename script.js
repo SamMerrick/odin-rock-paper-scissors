@@ -14,36 +14,59 @@ function playRound(playerSelection, computerSelection) {
   playerSelection = properCase(playerSelection);
 
   if (!choices.find((choice) => choice == playerSelection)) {
-    return "Enter Rock, Paper or Scissors";
+    console.error("Enter Rock, Paper or Scissors");
+    return;
   }
 
   if (playerSelection == computerSelection) {
-    return `Tie! Both picked ${computerSelection}`;
+    return "Tie";
   }
   if (playerSelection == "Rock") {
     if (computerSelection == "Scissors") {
-      return "You win! Rock beats Scissors";
+      return "Player";
     }
     if (computerSelection == "Paper") {
-      return "You lose! Paper beats Rock";
+      return "Computer";
     }
   } else if (playerSelection == "Paper") {
     if (computerSelection == "Rock") {
-      return "You win! Paper beats Rock";
+      return "Player";
     }
     if (computerSelection == "Scissors") {
-      return "You lose! Scissors beats Paper";
+      return "Computer";
     }
   } else if (playerSelection == "Scissors") {
     if (computerSelection == "Paper") {
-      return "You win! Scissors beats Paper";
+      return "Player";
     }
     if (computerSelection == "Rock") {
-      return "You lose! Rock beats Scissors";
+      return "Computer";
     }
   }
 }
 
-const playerSelection = "roCk";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+
+  for (i = 0; i < 5; i++) {
+    playerSelection = prompt("Rock, Paper or Scissors?");
+
+    let computerSelection = getComputerChoice();
+    let winner = playRound(playerSelection, computerSelection);
+
+    if (winner == "Computer") {
+      console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+      computerScore++;
+    } else if (winner == "Player") {
+      console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+      playerScore++;
+    } else if (winner == "Tie") {
+      console.log(`Tie! Both picked ${computerSelection}`);
+    } else {
+      console.log("Something went wrong");
+    }
+  }
+
+  console.log(`Game over! Computer: ${computerScore} Player ${playerScore}`);
+}
