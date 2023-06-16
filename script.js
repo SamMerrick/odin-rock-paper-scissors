@@ -13,6 +13,10 @@ function properCase(string) {
 function playRound(playerSelection, computerSelection) {
   playerSelection = properCase(playerSelection);
 
+  if (!choices.find((choice) => choice == playerSelection)) {
+    return "Enter Rock, Paper or Scissors";
+  }
+
   if (playerSelection == computerSelection) {
     return `Tie! Both picked ${computerSelection}`;
   }
