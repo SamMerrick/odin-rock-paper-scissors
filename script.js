@@ -1,18 +1,47 @@
-const choices = ["Rock", "Paper", "Scissors"];
+let playerScore = 0;
+let computerScore = 0;
+let round = 0;
+let gameFinished = false;
 
+const resultText = document.querySelector("#result");
 const buttons = document.querySelectorAll(".choice");
+
 buttons.forEach(button => { button.addEventListener('click', () => console.log(playRound(button.dataset.choice)))})
 
 function getComputerChoice() {
+  const choices = ["Rock", "Paper", "Scissors"];
   const randomNumber = Math.floor(Math.random() * choices.length);
   return choices[randomNumber];
 }
 
-
 function playRound(playerSelection) {
-  
-  const computerSelection = getComputerChoice();
 
+  if(gameFinished) return;
+
+  const computerSelection = getComputerChoice();
+  const winner = getWinner(playerSelection, computerSelection);
+
+  if (winner == "Computer") {
+    computerScore++;
+    resultText.innerText =`You lose! ${computerSelection} beats ${playerSelection}`;
+  } else if (winner == "Player") {
+    playerScore++;
+    resultText.innerText =`You win! ${playerSelection} beats ${computerSelection}`;
+  } else if (winner == "Tie") {
+    resultText.innerText =`Tie! Both picked ${computerSelection}`;
+  } else {
+    resultText.innerText = "Something went wrong";
+  }
+
+  round++;
+
+  if(round >= 5) {
+    gameFinished = true;
+    console.log(`Game over! Computer: ${computerScore} Player ${playerScore}`);
+  }
+}
+
+function getWinner(playerSelection, computerSelection) {
   if (playerSelection == computerSelection) {
     return "Tie";
   }
@@ -38,30 +67,4 @@ function playRound(playerSelection) {
       return "Computer";
     }
   }
-}
-
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-
-  for (i = 0; i < 5; i++) {
-    playerSelection = prompt("Rock, Paper or Scissors?");
-
-    let computerSelection = getComputerChoice();
-    let winner = playRound(playerSelection, computerSelection);
-
-    if (winner == "Computer") {
-      console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-      computerScore++;
-    } else if (winner == "Player") {
-      console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-      playerScore++;
-    } else if (winner == "Tie") {
-      console.log(`Tie! Both picked ${computerSelection}`);
-    } else {
-      console.log("Something went wrong");
-    }
-  }
-
-  console.log(`Game over! Computer: ${computerScore} Player ${playerScore}`);
 }
