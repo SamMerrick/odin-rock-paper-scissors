@@ -6,8 +6,10 @@ let computerScore = 0;
 const gameDiv = document.querySelector("#game");
 const gameOverDiv = document.querySelector("#game-over");
 
+const playerScoreSpan = document.querySelector("#player-score");
+const computerScoreSpan = document.querySelector("#computer-score");
+
 const roundWinner = document.querySelector("#round-winner");
-const gameWinner = document.querySelector("#game-winner");
 
 const buttons = document.querySelectorAll(".choice");
 buttons.forEach(button => { button.addEventListener('click', () => console.log(playRound(button.dataset.choice)))})
@@ -15,6 +17,7 @@ buttons.forEach(button => { button.addEventListener('click', () => console.log(p
 function resetGame() {
   playerScore = 0;
   computerScore = 0;
+  updateScores();
   roundWinner.innerText = "";
 
   gameDiv.classList.remove('hidden');
@@ -24,7 +27,6 @@ function resetGame() {
 function endGame() {
   gameDiv.classList.add('hidden');
   gameOverDiv.classList.remove('hidden');
-  gameWinner.innerText = `Game over! Computer: ${computerScore} Player ${playerScore}`;
 }
 
 function getComputerChoice() {
@@ -50,9 +52,16 @@ function playRound(playerSelection) {
     roundWinner.innerText = "Something went wrong";
   }
 
+  updateScores();
+
   if(playerScore >= maxScore || computerScore >= maxScore) {
     endGame();
   }
+}
+
+function updateScores () {
+  playerScoreSpan.innerText = playerScore;
+  computerScoreSpan.innerText = computerScore;
 }
 
 function getWinner(playerSelection, computerSelection) {
