@@ -9,11 +9,21 @@
   </head>
   <body>
     <h1>Rock Paper Scissors</h1>
-    <div class="game-buttons">
-      <button class="choice" data-choice="Rock">🪨 Rock</button>
-      <button class="choice" data-choice="Paper">📄 Paper</button>
-      <button class="choice" data-choice="Scissors">✂️ Scissors</button>
+    <div id="game" class="">
+      <div class="game-buttons">
+        <button class="choice" data-choice="Rock">🪨 Rock</button>
+        <button class="choice" data-choice="Paper">📄 Paper</button>
+        <button class="choice" data-choice="Scissors">✂️ Scissors</button>
+      </div>
+      <p id="round-winner" class="result"></p>
     </div>
-    <p id="result"></p>
+
+    <div id="game-over" class="hidden">
+      <p id="game-winner" class="result"></p>
+      <div class="game-buttons">
+        <button onclick="resetGame()">Start Over</button>
+      </div>
+ 
+    </div>
   </body>
 </html>

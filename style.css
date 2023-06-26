@@ -6,13 +6,22 @@ h1 {
     text-align:center;
 }
 
-button {
+.choice {
     width: 200px;
     height: 200px;
+    cursor: pointer;
 }
 
 .game-buttons {
     display:flex;
     justify-content:center;
     gap:16px;
+}
+
+.result {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
 }

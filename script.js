@@ -1,12 +1,31 @@
+const maxScore = 5;
+
 let playerScore = 0;
 let computerScore = 0;
-let round = 0;
-let gameFinished = false;
 
-const resultText = document.querySelector("#result");
+const gameDiv = document.querySelector("#game");
+const gameOverDiv = document.querySelector("#game-over");
+
+const roundWinner = document.querySelector("#round-winner");
+const gameWinner = document.querySelector("#game-winner");
+
 const buttons = document.querySelectorAll(".choice");
-
 buttons.forEach(button => { button.addEventListener('click', () => console.log(playRound(button.dataset.choice)))})
+
+function resetGame() {
+  playerScore = 0;
+  computerScore = 0;
+  roundWinner.innerText = "";
+
+  gameDiv.classList.remove('hidden');
+  gameOverDiv.classList.add('hidden');
+}
+
+function endGame() {
+  gameDiv.classList.add('hidden');
+  gameOverDiv.classList.remove('hidden');
+  gameWinner.innerText = `Game over! Computer: ${computerScore} Player ${playerScore}`;
+}
 
 function getComputerChoice() {
   const choices = ["Rock", "Paper", "Scissors"];
@@ -16,28 +35,23 @@ function getComputerChoice() {
 
 function playRound(playerSelection) {
 
-  if(gameFinished) return;
-
   const computerSelection = getComputerChoice();
   const winner = getWinner(playerSelection, computerSelection);
 
   if (winner == "Computer") {
     computerScore++;
-    resultText.innerText =`You lose! ${computerSelection} beats ${playerSelection}`;
+    roundWinner.innerText =`You lose! ${computerSelection} beats ${playerSelection}`;
   } else if (winner == "Player") {
     playerScore++;
-    resultText.innerText =`You win! ${playerSelection} beats ${computerSelection}`;
+    roundWinner.innerText =`You win! ${playerSelection} beats ${computerSelection}`;
   } else if (winner == "Tie") {
-    resultText.innerText =`Tie! Both picked ${computerSelection}`;
+    roundWinner.innerText =`Tie! Both picked ${computerSelection}`;
   } else {
-    resultText.innerText = "Something went wrong";
+    roundWinner.innerText = "Something went wrong";
   }
 
-  round++;
-
-  if(round >= 5) {
-    gameFinished = true;
-    console.log(`Game over! Computer: ${computerScore} Player ${playerScore}`);
+  if(playerScore >= maxScore || computerScore >= maxScore) {
+    endGame();
   }
 }
 
