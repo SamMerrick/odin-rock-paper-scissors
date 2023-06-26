@@ -1,22 +1,17 @@
 const choices = ["Rock", "Paper", "Scissors"];
 
+const buttons = document.querySelectorAll(".choice");
+buttons.forEach(button => { button.addEventListener('click', () => console.log(playRound(button.dataset.choice)))})
+
 function getComputerChoice() {
   const randomNumber = Math.floor(Math.random() * choices.length);
   return choices[randomNumber];
 }
 
-function properCase(string) {
-  const lower = string.toLowerCase();
-  return lower[0].toUpperCase() + lower.slice(1);
-}
 
-function playRound(playerSelection, computerSelection) {
-  playerSelection = properCase(playerSelection);
-
-  if (!choices.find((choice) => choice == playerSelection)) {
-    console.error("Enter Rock, Paper or Scissors");
-    return;
-  }
+function playRound(playerSelection) {
+  
+  const computerSelection = getComputerChoice();
 
   if (playerSelection == computerSelection) {
     return "Tie";
