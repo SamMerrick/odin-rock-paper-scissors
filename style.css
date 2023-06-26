@@ -11,12 +11,29 @@ h1 {
     width: 200px;
     height: 200px;
     cursor: pointer;
+    border-radius: 20px;
+    border: solid 2px black;
+    font-weight: 600;
+}
+
+.choice:hover {
+    background-color: #F5F5F5;
+    transition: 0.2s;
+}
+.choice:active {
+    background-color: #E5E5E5;
+    transition: 0.2s;
+}
+
+.choice .emoji {
+    font-size: 48px;
 }
 
 .game-buttons {
     display:flex;
     justify-content:center;
     gap:16px;
+    margin: 48px 0px;
 }
 
 .hidden {
