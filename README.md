@@ -1,9 +1,5 @@
 # odin-rock-paper-scissors
 
-A simple JS game played in the console.
+A simple JS game.
 
-## Instructions to play
-
-1. Open [GitHub Pages](https://samjmerrick.github.io/odin-rock-paper-scissors/)
-2. Open developer console
-3. Type game() to start
+[View on GitHub Pages](https://samjmerrick.github.io/odin-rock-paper-scissors/)
